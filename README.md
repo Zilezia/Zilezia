@@ -21,7 +21,3 @@ https://github.com/Zilezia/world-places
 https://github.com/Zilezia/zilezia-vercel-app
 
 https://github.com/Zilezia/lain-svg 
-
-<div id="header" align="right">
-  <a href="https://komarev.com/ghpvc"><img src="https://komarev.com/ghpvc/?username=Zilezia&color=blueviolet&abbreviated=true" alt="Displays amount of profile views for Zilezia"/></a>
-</div> 
