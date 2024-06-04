@@ -16,8 +16,10 @@ I want to get into data engineering 👍
 - [ ] c
 
 ## working on: 
-https://github.com/Zilezia/world-places
+[World Places](https://github.com/Zilezia/world-places)
 
-https://github.com/Zilezia/zilezia-vercel-app
+[ZJountries](https://github.com/Zilezia/ZJountries)
 
-https://github.com/Zilezia/lain-svg 
+[Project Statuses](https://github.com/Zilezia/zilezia-vercel-app)
+
+[lain svg's](https://github.com/Zilezia/lain-svg)
