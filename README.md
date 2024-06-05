@@ -22,4 +22,6 @@ I want to get into data engineering 👍
 
 [Project Statuses](https://github.com/Zilezia/zilezia-vercel-app)
 
-[lain svg's](https://github.com/Zilezia/lain-svg)
+<!-- [lain svg's](https://github.com/Zilezia/lain-svg) <!-- unnecessary to be announced its a more personal thing :/ -->
+
+[//]: # (funny comment test)
