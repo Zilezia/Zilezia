@@ -16,7 +16,7 @@ I want to get into data engineering 👍
 - [ ] c
 
 ## working on: 
-[World Places](https://github.com/Zilezia/world-places)
+[ZJountries api](https://github.com/Zilezia/ZJountries-api)
 
 [ZJountries](https://github.com/Zilezia/ZJountries)
 
