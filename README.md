@@ -20,7 +20,7 @@ I want to get into data engineering 👍
 
 [ZJountries](https://github.com/Zilezia/ZJountries)
 
-[Project Statuses](https://github.com/Zilezia/zilezia-vercel-app)
+<!-- [Project Statuses](https://github.com/Zilezia/zilezia-vercel-app) -->
 
 [//]: # (idk might start in like a month or so maybe longer)
 <!-- [Playful Pandas](https://github.com/Zilezia/playful_pandas) -->
