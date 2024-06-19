@@ -15,12 +15,15 @@ I want to get into data engineering 👍
 - [ ] rust
 - [ ] c
 
-## working on: 
-[ZJountries api](https://github.com/Zilezia/ZJountries-api)
+
+## statuses:
+https://zilezia.vercel.app/
+
+<!-- [ZJountries api](https://github.com/Zilezia/ZJountries-api)
 
 [ZJountries](https://github.com/Zilezia/ZJountries)
 
-<!-- [Project Statuses](https://github.com/Zilezia/zilezia-vercel-app) -->
+[Project Statuses](https://github.com/Zilezia/zilezia-vercel-app) -->
 
 [//]: # (idk might start in like a month or so maybe longer)
 <!-- [Playful Pandas](https://github.com/Zilezia/playful_pandas) -->
