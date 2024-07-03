@@ -18,7 +18,7 @@ I want to get into data engineering 👍
 
 ## statuses:
 [//]: # (the bot and db layout are kind bad atm ill have to fix it)
-<!-- https://zilezia.vercel.app/ -->
+https://zilezia.vercel.app/
 
 <!-- [ZJountries api](https://github.com/Zilezia/ZJountries-api)
 
