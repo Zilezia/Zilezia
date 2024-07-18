@@ -11,6 +11,6 @@ I want to get into data engineering 👍
 - [X] python
 - [X] javascript
 - [X] typescript
-- [ ] r
+- [X] r
 - [ ] rust
 - [ ] c
