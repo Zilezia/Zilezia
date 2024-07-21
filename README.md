@@ -14,3 +14,9 @@ I want to get into data engineering 👍
 - [X] r
 - [ ] rust
 - [ ] c
+
+## stats
+
+![Stats banner](https://github-readme-stats.vercel.app/api?username=zilezia&theme=radical&show_icons=true&hide_border=false&count_private=true)
+
+![Streak banner](https://github-readme-streak-stats.herokuapp.com/?user=zilezia&theme=radical&hide_border=false)
