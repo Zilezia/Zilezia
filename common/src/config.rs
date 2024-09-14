@@ -1,25 +1,32 @@
-use dotenv::dotenv;
+use dotenv::from_filename;
 use std::env;
 
-pub fn load_env() {
-    dotenv().ok();
+pub fn load_env() { // change to dotenv.ok?
+    from_filename("./common/.env").ok();
 }
-// this is ight
-pub fn get_mysql_password() -> String {
-    env::var("MYSQL_PASSWORD").expect("MYSQL_PASSWORD must be set.")
+pub fn get_mysql_url() -> String {
+    let user = env::var("DB_USER").expect("DB_USER must be set.");
+    let password = env::var("DB_PASSWORD").expect("DB_PASSWORD must be set.");
+    let host = env::var("DB_HOST").expect("DB_HOST must be set.");
+    let port = env::var("DB_PORT").expect("DB_PORT must be set.");
+    let db_name = env::var("DB_NAME").expect("DB must be set.");
+    
+    format!(
+        "mysql://{}:{}@{}:{}/{}", 
+        user, password, host, port, db_name
+    )
 }
-// so is this
+
+pub fn get_table() -> String {
+    env::var("TABLE").expect("TABLE must be set.")
+}
+pub fn get_base_url() -> String {
+    env::var("BASE_URL").expect("BASE_URL must be set.")
+}
 pub fn get_ip() -> String {
-    env::var("IP").expect("IP must be set.")
+    env::var("IPH").expect("IPH must be set.")
 }
-// this one needs to be an int
-pub fn get_port() -> u16 {
-    let get = env::var("PORT").expect("PORT must be set.");
-    let port = get.parse::<u16>().unwrap();
-    return port;
-}
-// this one for some reason wants a &str
-// currently stuck, whole 24 line underlined
-pub fn get_api_route<'a>() -> &'a str {
-    env::var("API_ROUTE").expect("API_ROUTE must be set.").as_str()
+// this one needs to be an uint, a bit
+pub fn get_port() -> String {
+    env::var("PORT").expect("PORT must be set.")
 }

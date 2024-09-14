@@ -1,7 +1,11 @@
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct User {
-    pub id: u32,
-    pub username: String,
+pub struct Activity {
+    pub id: String,
+    pub name: String,
+    pub status: String,
+    pub url: String,
+    pub display: bool
 }
+// add like versions maybe?

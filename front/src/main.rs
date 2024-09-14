@@ -1,40 +1,43 @@
-use yew::prelude::*;
-use wasm_bindgen_futures::spawn_local;
-use reqwest::Client;
+mod components;
+mod pages;
 
-use common::models::User;
+use yew::prelude::*;
+use yew_router::prelude::*;
+
+use pages::{
+    home::Home, 
+    notfound::NotFound
+};
+use components::header::Header;
+
+#[derive(Debug, Clone, Routable, PartialEq)]
+pub enum Route {
+    #[at("/")]
+    Home,
+    #[not_found]
+    #[at("/404")]
+    NotFound
+}
+
+fn switch(routes: Route) -> Html {
+    match routes {
+        Route::Home => html! { <Home /> },
+        Route::NotFound => html! { <NotFound /> },
+    }
+}
 
 #[function_component(App)]
 fn app() -> Html {
-    let users = use_state(|| Vec::new());
-
-    {
-        let users = users.clone();
-        use_effect_with_deps(move |_| {
-            let users = users.clone();
-            spawn_local(async move {
-                let client = Client::new();
-                let response = client.get("http://127.0.0.1:8080/api/users")
-                    .send()
-                    .await
-                    .expect("Failed to fetch");
-                let users_list: Vec<User> = response.json().await.expect("Failed to parse JSON");
-                users.set(users_list);
-            });
-            || ()
-        }, ());
-    }
-
-    html! {
-        <div>
-            <h1>{ "Users" }</h1>
-            <ul>
-                { for users.iter().map(|user| html! {
-                    <li>{ format!("ID: {}, Username: {}", user.id, user.username) }</li>
-                }) }
-            </ul>
+    html! {<div id="root">
+        <div class="main_container">
+            <Header />
+            <div class="main">
+                <BrowserRouter>
+                    <Switch<Route> render={switch} />
+                </BrowserRouter>
+            </div>
         </div>
-    }
+    </div>}
 }
 
 fn main() {
