@@ -32,7 +32,7 @@ pub fn get_base_url() -> String {
     var("BASE_URL").expect("BASE_URL must be set.")
 }
 pub fn get_ip() -> String {
-    var("IPH").expect("IPH must be set.")
+    var("LIP").expect("LIP must be set.")
 }
 // this one needs to be an uint, a bit
 pub fn get_port() -> String {

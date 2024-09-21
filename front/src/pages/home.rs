@@ -13,7 +13,8 @@ pub fn home() -> Html {
             let activs = activs.clone();
             spawn_local(async move {
                 let client = Client::new();
-                let url = "http://localhost:80/api";
+		let ip = std::env!("LIP");
+                let url = format!("http://{}:8080/api", ip);
                 let response = client.get(url)
                     .send()
                     .await
