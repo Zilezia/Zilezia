@@ -13,9 +13,8 @@ pub fn home() -> Html {
             let activs = activs.clone();
             spawn_local(async move {
                 let client = Client::new();
-		let ip = std::env!("LIP");
-		let port = std::env!("PORT");
-                let url = format!("http://{}:{}/api", ip, port);
+		let ip = std::env!("LIP"); // well its actually the domain
+                let url = format!("https://{}/api", ip);
                 let response = client.get(url)
                     .send()
                     .await

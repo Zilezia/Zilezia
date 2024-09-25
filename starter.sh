@@ -1,3 +1,5 @@
+
+export LIP=zilezia.dev
 echo "Building frontend"
 cd ./front
 trunk build --release
