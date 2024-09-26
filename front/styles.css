@@ -82,3 +82,16 @@ h1 {
     background-color: rgb(27, 27, 27);
     transform: translateY(-10px);
 }
+
+.announce_title > code {
+    color: #777;
+}
+
+.img_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img_div > img {
+    width: 500px;
+}

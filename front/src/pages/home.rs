@@ -13,8 +13,8 @@ pub fn home() -> Html {
             let activs = activs.clone();
             spawn_local(async move {
                 let client = Client::new();
-		let ip = std::env!("LIP"); // well its actually the domain
-                let url = format!("https://{}/api", ip);
+		        let ip = std::env!("HIP"); // domain or lIP depending on what build ran
+                let url = format!("https://{}/api", ip); // is this still gonna work while local?
                 let response = client.get(url)
                     .send()
                     .await
@@ -32,30 +32,30 @@ pub fn home() -> Html {
             { for activs.iter().map(|activ| { 
                 if !activ.name.is_empty() && !activ.status.is_empty() {
 		    if activ.display == true {
-                        let status_color = match activ.status.as_str() {
-                            "Finished" | "Right now" | "Now"
-			      => "#1dc200", // green
-                            "Working" 
-			      => "#ffcf00", // yellow
-                            "Updating" | "Fixing" 
-			      => "#1b43e8", // blue
-                            "Not begun" | "Nothing" | "Dropped?" 
-			      => "#260024", // dark purple
-                            _ => "#b3b3b3", // grey as default
-                        };
+                let status_color = match activ.status.as_str() {
+                    "Finished" | "Right now" | "Now"
+                        => "#1dc200", // green
+                    "Working" 
+                        => "#ffcf00", // yellow
+                    "Updating" | "Fixing" 
+                        => "#1b43e8", // blue
+                    "Not begun" | "Nothing" | "Dropped?" 
+                        => "#260024", // dark purple
+                    _ => "#b3b3b3", // grey as default
+                };
                     
-                        html! {
-                                <a href={activ.url.clone()} id={activ.id.clone()} class="status_card">
-                                    <div class="top_half">
-                                        <p class="item_name">{ &activ.name }</p>
-                                    </div>
-                                    <div class="bottom_half">
-                                        <p class="item_status" style={format!("color: {}", status_color)}>
-                                            { &activ.status }
-                                        </p>
-                                    </div>
-                                </a>
-                        } // dont show vvv
+                html! {
+                    <a href={activ.url.clone()} id={activ.id.clone()} class="status_card">
+                        <div class="top_half">
+                            <p class="item_name">{ &activ.name }</p>
+                        </div>
+                        <div class="bottom_half">
+                            <p class="item_status" style={format!("color: {}", status_color)}>
+                                { &activ.status }
+                            </p>
+                        </div>
+                    </a>
+                } // dont show vvv
 		    } else { html! {} }
                 } else { html! {} }
            }) }
