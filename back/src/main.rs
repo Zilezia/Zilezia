@@ -1,5 +1,3 @@
-use std::fs;
-use std::io::Result;
 use actix_cors::Cors;
 use actix_web::{web, App, HttpServer, HttpResponse, Responder};
 use actix_web_lab::web::spa;
@@ -7,9 +5,8 @@ use mysql::*;
 use mysql::prelude::*;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-use common::config::{get_ip, get_mysql_url, get_port, get_table, load_env};
+use common::config::{get_mysql_url, get_table, load_env};
 use common::models::Activity;
-
 
 // only "global" GET cuz i wanna edit the db directly using a bot
 async fn get_activities() -> impl Responder {
@@ -27,6 +24,7 @@ async fn get_activities() -> impl Responder {
         Err(e) => return HttpResponse::InternalServerError().body(format!("Database connection error: {}", e)),
     };
     let query = format!(
+        // all not work?
         "SELECT id, name, status, url, display 
         FROM {}", get_table());
     let result: Vec<Activity> = match conn.query_map(

@@ -15,6 +15,6 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 mysql = "23.0.0"
 dotenv = "0.15"
-openssl = "0.10"
-openssl-sys = { version = "0.9.103", features = ["vendored"] }
+openssl = { version = "0.10", features = ["vendored"] }
+openssl-sys = { version = "0.9.103", features = ["vendored"], default-features = false }
 native-tls = { version = "0.2", features = ["alpn"] }

@@ -3,6 +3,6 @@ target
 Cargo.lock
 
 .env
-dev.sh
-notes.txt
 *.pem
+
+.for_me/
