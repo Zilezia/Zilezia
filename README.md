@@ -13,7 +13,7 @@ I want to get into data engineering 👍
 - [x] typescript
 - [x] rust
 - [x] r
-- [] c
+- [ ] c
 
 
 [https://zilezia.dev/status](https://zilezia.dev/status)
