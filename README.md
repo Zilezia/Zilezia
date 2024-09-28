@@ -1,4 +1,19 @@
-# `Zilezia`
+## me:
+name = "June"
+  
 
-Uses MySQL, and soon used through by discord.py (this just to edit the db cuz its cool that way)
-I'll include the bot somewhere here or just keep it separate in another repo, it actually be might one that I already made just change the mysql connection
+
+I want to get into data engineering 👍
+
+---
+
+## languages:
+- [x] python
+- [x] javascript
+- [x] typescript
+- [x] rust
+- [x] r
+- [] c
+
+
+[https://zilezia.dev/status](https://zilezia.dev/status)

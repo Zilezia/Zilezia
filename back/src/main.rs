@@ -5,7 +5,7 @@ use mysql::*;
 use mysql::prelude::*;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-use common::config::{get_mysql_url, get_table, load_env};
+use common::config::{load_env, get_mysql_url, get_table, get_ip};
 use common::models::Activity;
 
 // only "global" GET cuz i wanna edit the db directly using a bot
@@ -53,6 +53,9 @@ async fn get_activities() -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     load_env();
+
+    // let hip = get_ip();
+    // let url = format!("{}:8080", hip);
 
     let mut acceptor = SslAcceptor::mozilla_intermediate(SslMethod::tls())?;
     acceptor.set_private_key_file("./back/private.key.pem", SslFiletype::PEM)?;

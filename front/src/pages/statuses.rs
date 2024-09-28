@@ -4,8 +4,8 @@ use reqwest::Client;
 
 use common::models::Activity;
 
-#[function_component(Home)]
-pub fn home() -> Html {
+#[function_component(Statuses)]
+pub fn statuses() -> Html {
     let activs = use_state(|| Vec::new());
     {
         let activs = activs.clone();
@@ -13,7 +13,7 @@ pub fn home() -> Html {
             let activs = activs.clone();
             spawn_local(async move {
                 let client = Client::new();
-		        let ip = std::env!("HIP"); // domain or lIP depending on what build ran
+		        let ip = std::env!("HIP"); // domain or LIP depending on what build ran
                 let url = format!("https://{}/api", ip); // is this still gonna work while local?
                 let response = client.get(url)
                     .send()
@@ -27,7 +27,6 @@ pub fn home() -> Html {
     }
 
     html! {<>
-        <h2>{ "Activity" }</h2>
         <div class="statuses_container">
             { for activs.iter().map(|activ| { 
                 if !activ.name.is_empty() && !activ.status.is_empty() {
