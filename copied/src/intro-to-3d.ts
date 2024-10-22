@@ -60,7 +60,7 @@ class Shape {
 }
 
 function introTo3DDemo() {
-  const canvas = document.getElementById('demo-canvas');
+  const canvas = document.getElementById('canvas');
   if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
     showError('Could not get Canvas reference');
     return;
@@ -133,10 +133,13 @@ function introTo3DDemo() {
     // Update
     cameraAngle += dt * glMatrix.toRadian(10);
 
-    // const cameraX = 3 * Math.sin(cameraAngle);
     const cameraX = 3 * Math.sin(cameraAngle);
-    const cameraY = 3 * Math.cos(cameraAngle);
-    const cameraZ = 3 * Math.tanh(cameraAngle);
+    const cameraY = 3 * Math.sin(cameraAngle);
+    // const cameraZ = 3 * Math.tanh(cameraAngle);
+
+    // const cameraX = 3
+    // const cameraY = 3
+    const cameraZ = 3
 
     mat4.lookAt(
       matView,

@@ -5,7 +5,7 @@ use mysql::*;
 use mysql::prelude::*;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
-use common::config::{load_env, get_mysql_url, get_table, get_ip};
+use common::config::{load_env, get_mysql_url, get_table};
 use common::models::Activity;
 
 // only "global" GET cuz i wanna edit the db directly using a bot
@@ -54,9 +54,6 @@ async fn get_activities() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     load_env();
 
-    // let hip = get_ip();
-    // let url = format!("{}:8080", hip);
-
     let mut acceptor = SslAcceptor::mozilla_intermediate(SslMethod::tls())?;
     acceptor.set_private_key_file("./back/private.key.pem", SslFiletype::PEM)?;
     acceptor.set_certificate_chain_file("./back/domain.cert.pem")?;
@@ -67,9 +64,11 @@ async fn main() -> std::io::Result<()> {
             .route("/api", web::get().to(get_activities)) // this way may be bad, todo: swap to .service()
             .service(
                 spa() // now runable from root, just ofc compile frontend
-                .index_file("./front/dist/index.html") 
+                // .index_file("./front/dist/index.html") 
+                .index_file("./lain_wgl/index.html") 
                 .static_resources_mount("/")
-                .static_resources_location("./front/dist")
+                // .static_resources_location("./front/dist")
+                .static_resources_location("./lain_wgl")
                 .finish()
             )
     })

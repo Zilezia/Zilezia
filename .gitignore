@@ -1,6 +1,7 @@
-dist
+#dist
 target
 Cargo.lock
 
 .env
 *.pem
+node_modules

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="styles.css" type="text/css" rel="stylesheet"/>
+		<title>Psx Lain Theme</title>
+
+		<script src="js/gl.js"></script>
+		<script src="js/Math.js"></script>
+		<script src="js/Shaders.js"></script>
+		<script src="js/RenderLoop.js"></script>
+		<script src="js/Transform.js"></script>
+		<script src="js/Modal.js"></script>
+		<script src="js/Primatives.js"></script>
+		<script src="js/Camera.js"></script>
+		<script src="js/Shaders_Extra.js"></script>
+		<script src="js/ObjLoader.js"></script>
+
+		<script src="toCanvas.js"></script>
+	</head>
+<body>
+	<canvas id="glcanvas">Your browser doesn't support canvases.</canvas>
+	<span id="lblFPS">0</span>
+	<!-- <div>
+	</div> -->
+	<img src="shared/UV_Grid_Lrg.jpg" id="imgTex" style="display:none;">
+	<img src="shared/miramar_back.png" id="cube01_back" style="display:none;">
+	<img src="shared/miramar_front.png" id="cube01_front" style="display:none;">
+	<img src="shared/miramar_bottom.png" id="cube01_bottom" style="display:none;">
+	<img src="shared/miramar_left.png" id="cube01_left" style="display:none;">
+	<img src="shared/miramar_right.png" id="cube01_right" style="display:none;">
+	<img src="shared/miramar_top.png" id="cube01_top" style="display:none;">
+
+	<img src="shared/grimmnight_back.png" id="cube02_back" style="display:none;">
+	<img src="shared/grimmnight_front.png" id="cube02_front" style="display:none;">
+	<img src="shared/grimmnight_bottom.png" id="cube02_bottom" style="display:none;">
+	<img src="shared/grimmnight_left.png" id="cube02_left" style="display:none;">
+	<img src="shared/grimmnight_right.png" id="cube02_right" style="display:none;">
+	<img src="shared/grimmnight_top.png" id="cube02_top" style="display:none;">
+
+
+	<script id="vertex_shader" type="x-shader/x-vertex">#version 300 es
+		in vec3 a_position;	//Making it a vec4, the w component is used as color index from uColor
+		in vec3 a_norm;
+		in vec2 a_uv;
+
+		uniform mat4 uPMatrix;
+		uniform mat4 uMVMatrix;
+		uniform mat4 uCameraMatrix;
+
+		out highp vec2 texCoord;  //Interpolate UV values to the fragment shader
+		
+		void main(void){
+			texCoord = a_uv;
+			gl_Position = uPMatrix * uCameraMatrix * uMVMatrix * vec4(a_position.xyz, 1.0); 
+		}
+	</script>
+
+	<script id="fragment_shader" type="x-shader/x-fragment">#version 300 es
+		precision mediump float;
+		
+		in highp vec2 texCoord;		//What pixel to pull from the texture
+		uniform sampler2D uMainTex;	//Holds the texture we loaded to the GPU
+		
+		out vec4 finalColor;
+		void main(void){
+			finalColor = texture(uMainTex,texCoord);
+		}
+	</script>
+
+	<script id="sky_vshader" type="x-shader/x-vertex">#version 300 es
+		in vec4 a_position;	
+		in vec2 a_uv;
+
+		uniform mat4 uPMatrix;
+		uniform mat4 uMVMatrix;
+		uniform mat4 uCameraMatrix;
+	
+		out highp vec3 texCoord;  //Interpolate UV values to the fragment shader
+		
+		void main(void){
+			texCoord = a_position.xyz;
+			gl_Position = uPMatrix * uCameraMatrix * vec4(a_position.xyz, 1.0); 
+		}
+	</script>
+
+	<script id="sky_fshader" type="x-shader/x-fragment">#version 300 es
+		precision mediump float;
+		
+		in highp vec3 texCoord;
+		uniform samplerCube uDayTex;
+		uniform samplerCube uNightTex;
+		uniform float uTime;
+		
+		out vec4 finalColor;
+		void main(void){
+			finalColor = mix( texture(uDayTex, texCoord), texture(uNightTex, texCoord), abs(sin(uTime * 0.0005)) );
+		}
+	</script>
+
+</body>
+</html>
