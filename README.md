@@ -1,11 +1,7 @@
 ## me:
 name = "June"
   
-
-
-I want to get into data engineering 👍
-
----
+Amatuer jack of all trades
 
 ## languages:
 - [x] python
@@ -15,5 +11,3 @@ I want to get into data engineering 👍
 - [x] r
 - [ ] c
 
-
-[https://zilezia.dev/status](https://zilezia.dev/status)

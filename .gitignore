@@ -2,6 +2,8 @@
 target
 Cargo.lock
 
+.gitignore
 .env
 *.pem
 node_modules
+LOCAL_back

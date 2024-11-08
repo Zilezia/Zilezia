@@ -210,8 +210,8 @@ class SkymapShader extends Shader{
     // setTime(t){ this.gl.uniform1f(this.uniformLoc.time,t); return this; }
 
     static async init(gl, pMatrix, skyTex) {
-        const vertSrc = await ShaderUtil.shaderFile("sky_vshader");
-        const fragSrc = await ShaderUtil.shaderFile("sky_fshader");
+        const vertSrc = await ShaderUtil.shaderFile("sky_vShader");
+        const fragSrc = await ShaderUtil.shaderFile("sky_fShader");
         return new SkymapShader(gl, vertSrc, fragSrc, pMatrix, skyTex);
     }
 
