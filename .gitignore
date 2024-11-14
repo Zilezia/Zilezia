@@ -1,4 +1,5 @@
 #dist
+*~
 target
 Cargo.lock
 
@@ -7,4 +8,6 @@ Cargo.lock
 *.pem
 node_modules
 LOCAL_back
-*~
+
+*.tex
+*.pdf
