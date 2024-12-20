@@ -1,0 +1,12 @@
+#+date:     20-12-2024
+#+author:   zilezia (meh)
+#+title:    Zilezia
+
+#+begin_src rust
+    let name = "June";
+    
+    println!("Amatuer jack of all trades")
+#+end_src
+
+** Rust Love
+

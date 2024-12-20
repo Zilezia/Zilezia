@@ -1,13 +1,16 @@
-#dist
 *~
+dist
 target
 Cargo.lock
 
-.gitignore
 .env
-*.pem
+ssl
+#*.pem
 node_modules
-LOCAL_back
 
+# havent touched this in like a month
+# why do i even got these files somewhere here? ToT
 *.tex
 *.pdf
+
+schizo.rs

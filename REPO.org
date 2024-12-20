@@ -1,8 +1,0 @@
-#+title: Zilezia
-#+author: Zilezia
-#+BEGIN_COMMENT
-im not sure if this will be visible on gh (obv when looked at source code)
-#+END_COMMENT
-
-still todo this
-
