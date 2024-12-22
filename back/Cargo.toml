@@ -1,16 +1,18 @@
 [package]
 name = "back"
-version = "0.1.0"
+version = "0.3.0"
 edition = "2021"
+authors = ["zilezia"]
 
 [dependencies]
 common = { path = "../common" }
 
-actix = "0.13.5"
+actix = "0.13"
 actix-rt = "2.5"
 actix-web = { version = "4.9", features = ["openssl"] }
 actix-cors = "0.7"
 actix-files = "0.6"
+actix-session = { version = "0.10", features = ["cookie-session"] }
 actix-web-lab = "0.22"
 actix-web-actors = "4.1"
 
@@ -25,3 +27,4 @@ openssl-sys = { version = "0.9.103", features = ["vendored"], default-features =
 native-tls = { version = "0.2", features = ["alpn"] }
 
 log = "0.4"
+env_logger = "0.11"

@@ -5,7 +5,7 @@ Cargo.lock
 
 .env
 ssl
-#*.pem
+*.swp
 node_modules
 
 # havent touched this in like a month
