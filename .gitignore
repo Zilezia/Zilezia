@@ -2,15 +2,10 @@
 dist
 target
 Cargo.lock
-
-.env
-ssl
 *.swp
 node_modules
-
-# havent touched this in like a month
-# why do i even got these files somewhere here? ToT
-*.tex
-*.pdf
+.env
+ssl
+server
 
 schizo.rs
