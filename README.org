@@ -1,5 +1,5 @@
-#+date:     20-12-2024
-#+author:   zilezia (meh)
+#+date:     15-03-2025
+#+author:   Zilezia
 #+title:    Zilezia
 
 #+begin_src rust

@@ -1,0 +1,5 @@
+#+date:     15-03-2025
+#+author:   Zilezia
+#+title:    Zilezia
+
+Having some ssh issues I can't resolve trying to figure that out atm
