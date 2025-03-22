@@ -1,11 +1,12 @@
 *~
+*.swp
+
+pkg
 dist
 target
+
 Cargo.lock
-*.swp
-node_modules
 .env
+
 ssl
 server
-
-schizo.rs

@@ -1,3 +1,117 @@
-[workspace]
-members = ["front", "back", "common"]
-default-members = ["back"]
+[package]
+name = "zilezia_dev"
+version = "1.0.1"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+cfg-if = "1.0.0"
+base64 = { version = "0.22" }
+http = { version = "1.2" }
+getrandom = { version = "0.2.15", features = ["js"] }
+leptos = { git = "https://github.com/leptos-rs/leptos", rev = "a39add50c09c18774a2be60a17344f51a9614df2", features = [
+	"islands"
+]}
+# leptos = { git = "https://github.com/leptos-rs/leptos", rev = "a9ed8461d19bd84dd1a67f324f7f0d835ab1462a", features = [
+	# "serde"
+# ] }
+leptos_axum = { git = "https://github.com/leptos-rs/leptos", rev = "a39add50c09c18774a2be60a17344f51a9614df2", optional = true }
+leptos_meta = { git = "https://github.com/leptos-rs/leptos", rev = "a39add50c09c18774a2be60a17344f51a9614df2" }
+leptos_router = { git = "https://github.com/leptos-rs/leptos", rev = "a39add50c09c18774a2be60a17344f51a9614df2" }
+log = "0.4"
+simple_logger = "4"
+env_logger = "0.11"
+serde = { version = "1.0" }
+thiserror = { version = "2.0" }
+time = { version = "0.3", features = ["macros", "formatting"], optional = true }
+tracing = { version = "0.1.37" }
+tracing-subscriber = { version = "0.3.16", features = ["env-filter"] }
+urlencoding = { version = "2.1" }
+wasm-bindgen = { version = "0.2" } # =0.2.100
+web-sys = { version = "0.3" }
+# gloo = { version = "0.11", features = ["utils", "dialogs", "storage", "timers", "futures"] }
+
+axum = { version = "0.7", features = [ "macros" ], optional = true }
+axum-login = { version = "0.16", optional = true }
+axum-server = { version = "0.7", optional = true, features = ["tls-openssl", "tls-rustls"] }
+openssl = { version = "0.10.71", optional = true, features = ["vendored"] }
+dotenv = { version = "0.15" }
+serde_json = { version = "1.0" }
+tokio = { version = "1.43", features = ["full"], optional = true }
+tower = { version = "0.5", features = ["full"], optional = true }
+tower-http = { version = "0.6", features = ["full", "trace"], optional = true }
+
+console_error_panic_hook = { version = "0.1" }
+
+sqlx = { version = "0.8.1", optional = true, default-features = false, features = [
+	"runtime-async-std-native-tls", 
+	"mysql",
+	"macros",
+	"chrono",
+] }
+async-trait = { version = "0.1.87", optional = true }
+tower-sessions = { version = "0.13" }
+argon2 = { version = "0.5.3" }
+rand_core = { version = "0.6.4", features = ["std"] }
+
+reactive_stores = { version = "0.1.7" }
+futures = { version = "0.3.31" }
+reactive_graph = { version = "0.1.7" }
+jsonwebtoken = { version = "9", optional = true }
+
+[features]
+default = ["ssr", "hydrate"]
+hydrate = ["leptos/hydrate"]
+ssr = [
+	"dep:leptos_axum",
+	"leptos/ssr",
+	"leptos_meta/ssr",
+	"leptos_router/ssr",
+	"dep:axum",
+	"dep:axum-server",
+	"dep:async-trait",
+	"dep:time",
+	"dep:sqlx",
+	"dep:openssl",
+	"dep:tower",
+	"dep:tower-http",
+	"dep:tokio",
+	"dep:jsonwebtoken"
+]
+
+
+[package.metadata.cargo-all-features]
+denylist = [
+	"time",
+	"axum",
+	"axum-server",
+	"leptos_axum",
+	"openssl",
+	"tower",
+	"tower-http",
+	"tokio",
+]
+skip_feature_sets = [["csr", "ssr"], ["csr", "hydrate"], ["ssr", "hydrate"]]
+
+[profile.wasm-release]
+inherits = "release"
+lto = true
+opt-level = 'z'
+codegen-units = 1
+
+[package.metadata.leptos]
+output-name = "zilezia_dev"
+site-root = "target/site"
+site-pkg-dir = "pkg"
+assets-dir = "public"
+site-addr = "127.0.0.1:3000"
+reload-port = 3001
+browserquery = "defaults"
+env = "DEV"
+bin-features = ["ssr"]
+bin-default-features = false
+lib-features = ["hydrate"]
+lib-default-features = false
+lib-profile-release = "wasm-release"
