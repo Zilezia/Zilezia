@@ -10,7 +10,6 @@ pub struct TokenClaims {
     pub exp: usize,
 }
 
-static AUTH_COOKIE: &str = "token";
 pub(crate) static REMOVE_COOKIE: &str = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
 pub(crate) fn encode_token(token_claims: TokenClaims) -> jsonwebtoken::errors::Result<String> {
@@ -34,7 +33,7 @@ pub(crate) fn decode_token(
 }
 
 #[tracing::instrument]
-pub(crate) fn get_token() -> Option<String> {
+pub(crate) fn get_token(token_name: String) -> Option<String> {
     if let Some(req) = leptos::context::use_context::<axum::http::request::Parts>() {
         req.headers
             .get(header::COOKIE)
@@ -45,30 +44,34 @@ pub(crate) fn get_token() -> Option<String> {
                     .and_then(|cookies| {
                         cookies
                             .split(';')
-                            .find(|cookie| cookie.trim().starts_with("token="))
+                            .find(|cookie| cookie.trim()
+                            	.starts_with(&token_name)
+                            )
                             .and_then(|cookie| cookie.split('=').nth(1))
                     })
                     .and_then(|token| decode_token(token).ok())
                     .map(|jwt| jwt.claims.sub)
     		})
+    		
     } else {
         None
     }
 }
 
 #[tracing::instrument]
-pub async fn set_token(user_id: String) -> bool {
+pub async fn set_token(token_name: String, sub: String) -> bool {
     if let Some(res) = leptos::context::use_context::<leptos_axum::ResponseOptions>() {
         let token = encode_token(TokenClaims {
-            sub: user_id,
+            sub,
             exp: (sqlx::types::chrono::Utc::now().timestamp() as usize) + 3_600_000,
         })
             .unwrap();
         res.insert_header(
             header::SET_COOKIE,
-            header::HeaderValue::from_str(&format!("{AUTH_COOKIE}={token}; path=/; HttpOnly"))
+            header::HeaderValue::from_str(&format!("{token_name}={token}; path=/; HttpOnly"))
                 .expect("header value couldn't be set"),
         );
+
         true
     } else {
         false

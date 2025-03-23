@@ -12,6 +12,8 @@ mod metadata;
 mod loading;
 mod form_input;
 mod real;
+mod cookie;
+pub use cookie::*;
 pub use real::*;
 pub use fur::*;
 pub use form_input::*;

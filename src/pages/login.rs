@@ -100,7 +100,7 @@ pub async fn login(
         name: user_res.get("name"),
     };
     
-	crate::utils::auth::set_token(user_id.clone()).await;
+	crate::utils::auth::set_token("token".into(), user_id.clone().into()).await;
 	session.insert("user_id", user_id).await.unwrap();
 	
 	leptos_axum::redirect("/");

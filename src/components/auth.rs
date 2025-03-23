@@ -7,15 +7,10 @@ use crate::user::{
 	ReadUser,
 	WriteUser,
 };
-use crate::components::Loading;
-
-// this is good enough I think idk?
+use crate::components::{ Fur, Loading };
 
 #[component]
-pub fn Auth(
-    set_user: WriteUser,
-    children: ChildrenFn,
-) -> impl IntoView {
+pub fn Auth(set_user: WriteUser, children: ChildrenFn) -> impl IntoView {
     let user = expect_context::<ReadUser>();
     let resource_user = Resource::new(|| (), |_| async { get_user().await });
 

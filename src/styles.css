@@ -25,6 +25,9 @@
     --light2-clr: rgba(188, 130, 172, 0.9); 
     --dark-clr: rgba(13, 0, 26, 1);
     --dark2-clr: rgba(26, 1, 52, 1);
+    --dark3-clr: rgba(26, 1, 26, 0.5);
+
+	--background-clr: var(--dark-clr);
 
     color-scheme: light dark;
     color: var(--light-clr);
@@ -102,6 +105,34 @@
 	transition: .5s ease;
  }
 
+.btnless {
+	border: none;
+	background: none;
+	color: var(--light-clr);
+}
+#person_auth {
+	text-align: left;
+	width: 100vw;
+	height: 100vh;
+}
+
+#person_auth > pre {
+	width: min-content;
+	margin: auto;
+
+	opacity: 1; 
+	/* scale: 1; */
+	transition: 1.5s ease;
+    	    animation: auth_icon_anim 1.5s ease-in-out forwards;
+   	-webkit-animation: auth_icon_anim 1.5s ease-in-out forwards;
+}
+
+@keyframes auth_icon_anim {
+	0% { opacity: 0; }
+	5% { scale: 0; }
+  	95%, 100% { opacity: 1; scale: 1; }
+}
+
 #main_header {
 	width: 100%;
 	display: flex;
@@ -136,6 +167,23 @@
 .darkened_text {
 	color: var(--dark2-clr);
 }
+
+.person_auth_text {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-family: 'Michroma';
+	font-size: 2em;	
+	opacity: 1;
+	animation: person_auth_text_anim 15s linear;
+}
+
+@keyframes person_auth_text_anim {
+	0%, 80% { opacity: 0; }
+  	100% { opacity: 1; }
+}
+.person_auth_text:first-child { top: 0; }
+.person_auth_text:last-child { bottom: 0; }
 
 .projects_section {
 	width: 100%; 
@@ -330,6 +378,58 @@ input[type="password"]:valid:not(:placeholder-shown) + .input_label {
 
 .smull { transition: 1s; }
 
+
+.cookie_icon {
+	position: fixed;
+	bottom: 1em;
+	left: 1em;
+	width: 2.5em;
+	height: 2.5em;
+	border-radius: 50%;
+	background-color: var(--dark-clr);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.fade_in {
+	opacity: 1;
+	animation: fade_in 2s linear;
+}
+
+@keyframes fade_in {
+	0% { opacity: 0; }
+  	100% { opacity: 1; }
+}
+
+.cookie_info {
+	position: fixed;
+	bottom: 1em;
+	width: fit-content;
+	padding: 1em;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 0.8em;
+	background-color: var(--dark3-clr);
+}
+
+.cookie_info > .btn_container {
+	position: relative;
+}
+.close_btn {
+	position: absolute;
+	right: 0;
+	padding: 0.25em;
+	aspect-ratio: 1/1;
+	width: 2em;
+	text-align: center;
+}
+
+
+
+
+
 @media only screen and (max-width: 900px) {
 	.smull { opacity: 0.5; }
 	.title_sub { display: none; }
@@ -359,3 +459,5 @@ input[type="password"]:valid:not(:placeholder-shown) + .input_label {
 	.project_card
 	{ width: 100%; }
 }
+
+

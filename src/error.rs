@@ -2,6 +2,9 @@ use http::status::StatusCode;
 use leptos::prelude::*;
 use thiserror::Error;
 
+use crate::pages::BotAuth;
+use crate::components::TitleAndDescription;
+
 #[derive(Clone, Debug, Error)]
 pub enum AppError {
 	// 4xx
@@ -63,6 +66,8 @@ pub fn ErrorTemplate(
     }
 
     view! {
+    	<TitleAndDescription title=format!("{} ", errors[0].status_code()) desc=""/>
+    	<BotAuth/>
         <h1>{if errors.len() > 1 { "Errors" } else { "Error" }}</h1>
         <For
             each=move || { errors.clone().into_iter().enumerate() }

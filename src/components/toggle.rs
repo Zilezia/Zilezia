@@ -7,29 +7,21 @@ pub fn ToggleProvider(children: Children) -> impl IntoView {
 }
 
 #[island]
-pub fn CardToggle(text: String) -> impl IntoView {
-	let (card_toggle, set_card_show) = expect_context::<RwSignal<bool>>().split();
+pub fn Toggle(text: String) -> impl IntoView {
+	let (_, set_toggle_show) = expect_context::<RwSignal<bool>>().split();
 	view! {
-		<button
-			class="btn"
-			on:click=move |_| {
-				log::info!("pressed toggle");
-				set_card_show.update(|n| *n = !*n);
-			}
-		>
-			{text}
-		</button>
+		<button on:click=move |_| { set_toggle_show.update(|n| *n = !*n); }>{text}</button>
 	}
 }
 
 #[island]
-pub fn CardShow(is: bool, children: Children) -> impl IntoView {
-	let card_toggle = expect_context::<RwSignal<bool>>().read_only();
+pub fn ToggleShow(is: bool, children: Children) -> impl IntoView {
+	let toggle_show = expect_context::<RwSignal<bool>>().read_only();
     view! {
 	    <div
 	    	style="transition: .5s"
-	    	style:opacity=move || if card_toggle.get() == is {"0"} else {"1"}
-	    	style:display=move || if card_toggle.get() == is {"contents"} else {"none"}
+	    	style:opacity=move || if toggle_show.get() == is {"0"} else {"1"}
+	    	style:display=move || if toggle_show.get() == is {"contents"} else {"none"}
         >{children()}</div>
     }
 }

@@ -118,10 +118,10 @@ pub fn Projects(set_user: WriteUser) -> impl IntoView {
    		// this is stupid /gen
     	<Auth set_user>
        		<ToggleProvider>
-       			<CardToggle text="+".into()/>
-       			<CardShow is=true>
+       			<Toggle text="+".into() attr:class="btn"/>
+       			<ToggleShow is=true>
        				<AddCard attr:class="project_add_card"/>
-       			</CardShow>
+       			</ToggleShow>
        		</ToggleProvider>
     	</Auth>
     	

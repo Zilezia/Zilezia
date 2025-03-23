@@ -19,6 +19,7 @@ pub fn Header(
 			<A href="">"Home"</A>
 			<A href="projects">"Projects"</A>
 
+			<A href="blog">"Blog"</A>
 			// TODO ion wanna now
 			// <div class="header_dropdown">
 				// <p class="dropdown_title" title="boring stuff *yawn*">"Legal"</p>
@@ -27,10 +28,9 @@ pub fn Header(
 					// <A href="terms-of-service">"ToS"</A>
 				// </div>
 			// </div>
-
 			
 			<Auth set_user>
-	        	<A href="panel" attr:class="total_last_link">"Panel"</A>
+	        	<A href="/panel" attr:class="total_last_link">"Panel"</A>
 			</Auth>
 		</header>
     }

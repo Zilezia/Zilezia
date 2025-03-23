@@ -9,7 +9,7 @@ use crate::models::*;
 #[tracing::instrument(skip_all)]
 #[server(ProjectApi, "/api/projects", endpoint = "test")]
 pub async fn please_work_api() -> Result<(), ServerFnError> {
-    let Some(_) = crate::utils::auth::get_token() else {
+    let Some(_) = crate::utils::auth::get_token("token".into()) else {
     	return Err(ServerFnError::new("Error"));
     };
 
@@ -19,7 +19,7 @@ pub async fn please_work_api() -> Result<(), ServerFnError> {
 #[tracing::instrument(skip_all)]
 #[server(EditProject, "/api/projects", endpoint = "edit")]
 pub async fn edit_project(id: String) -> Result<(), ServerFnError> {
-    let Some(_) = crate::utils::auth::get_token() else {
+    let Some(_) = crate::utils::auth::get_token("token".into()) else {
     	return Err(ServerFnError::new("Error"));
     };
 
@@ -29,7 +29,7 @@ pub async fn edit_project(id: String) -> Result<(), ServerFnError> {
 #[tracing::instrument(skip_all)]
 #[server(TrashProject, "/api/projects", endpoint = "trash")]
 pub async fn trash_project(id: String) -> Result<(), ServerFnError> {
-    let Some(_) = crate::utils::auth::get_token() else {
+    let Some(_) = crate::utils::auth::get_token("token".into()) else {
     	return Err(ServerFnError::new("Error"));
     };
     
@@ -60,7 +60,7 @@ pub async fn add_project(
 	repo: Option<String>,
 	blog: Option<bool>,
 ) -> Result<(), ServerFnError> {
-    let Some(_) = crate::utils::auth::get_token() else {
+    let Some(_) = crate::utils::auth::get_token("token".into()) else {
     	return Err(ServerFnError::new("API Auth Error"));
     };
 

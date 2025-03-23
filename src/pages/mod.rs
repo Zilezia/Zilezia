@@ -8,7 +8,8 @@ mod home;
 mod projects;
 mod pvp;
 mod tos;
-
+mod auth;
+pub use auth::*;
 pub use tos::*;
 pub use pvp::*;
 pub use not_found::*;

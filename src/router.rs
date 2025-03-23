@@ -5,7 +5,7 @@ use leptos_router::components::*;
 use crate::pages::*;
 use crate::pages::test::*;
 use crate::pages::login::*;
-use crate::components::auth::AuthPage;
+use crate::components::auth::*;
 
 use crate::components::*;
 use crate::user::*;
@@ -69,24 +69,32 @@ pub fn AppRouter() -> impl IntoView {
 
 	view! {
 		<Router>
-			<Header logout set_user/>
+			<BotAuth/>
 			<Routes fallback=|| {
 				let mut outside_errors = Errors::default();
 				outside_errors.insert_with_default_key(AppError::NotFound);
 				view! { <ErrorTemplate outside_errors/>}
 			}> 
-				<MainRoutes set_user/>
-				<AuthRoute login/>
-				<PrivateRoutes set_user/>
+				<Route path=path!("auth") view=PageAuth/>
+				
+				<MainRoutes set_user logout/>
+				<AuthRoute set_user login logout/>
+				<PrivateRoutes set_user logout/>
 			</Routes>
 		</Router>
 	}
 }
 
 #[component(transparent)]
-fn MainRoutes(set_user: WriteUser) -> impl MatchNestedRoutes + Clone {
+fn MainRoutes(set_user: WriteUser, logout: ServerAction<Logout>) -> impl MatchNestedRoutes + Clone {
     view! {
-        <ParentRoute path=path!("/") view=|| view!{ <main id="main_container"><Outlet/></main>}>
+        <ParentRoute path=path!("/") view=move || view!{
+        	<Header logout set_user/>
+        	<main id="main_container">
+        		<Outlet/>
+        	</main>
+        	<Cookie/>
+       	}>
             <Route path=path!("") view=Home/>
             <Route path=path!("test") view=Test/>
             <Route path=path!("projects") view=move || view!{ <Projects set_user/> }/>
@@ -102,9 +110,14 @@ fn MainRoutes(set_user: WriteUser) -> impl MatchNestedRoutes + Clone {
 }
 
 #[component(transparent)]
-fn AuthRoute(login: ServerAction<Login>) -> impl MatchNestedRoutes + Clone {
+fn AuthRoute(set_user: WriteUser, login: ServerAction<Login>, logout: ServerAction<Logout>) -> impl MatchNestedRoutes + Clone {
     view! {
-        <ParentRoute path=path!("/auth") view=Outlet>
+        <ParentRoute path=path!("/auth") view=move || view!{
+        	<Header logout set_user/>
+        	<main id="main_container">
+        		<Outlet/>
+        	</main>
+       	}>
             <Route
                 path=path!("login")
                 view=move || view! {<LoginView action=login/>}
@@ -114,7 +127,7 @@ fn AuthRoute(login: ServerAction<Login>) -> impl MatchNestedRoutes + Clone {
 }
 
 #[component(transparent)]
-fn PrivateRoutes(set_user: WriteUser) -> impl MatchNestedRoutes + Clone {
+fn PrivateRoutes(set_user: WriteUser, logout: ServerAction<Logout>) -> impl MatchNestedRoutes + Clone {
     view! {
     	<ParentRoute path=path!("") view=move || view! {
    			<AuthPage
@@ -126,7 +139,12 @@ fn PrivateRoutes(set_user: WriteUser) -> impl MatchNestedRoutes + Clone {
                   	);
          			view! { <ErrorTemplate outside_errors/>}
          		}
-   			><Outlet/></AuthPage>
+   			>
+   				<Header logout set_user/>
+	        	<main id="main_container">
+	        		<Outlet/>
+	        	</main>
+			</AuthPage>
     	}>
         	<Route path=path!("/panel") view=Panel/>
         </ParentRoute>
