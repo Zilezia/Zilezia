@@ -6,8 +6,7 @@ use tower_sessions::Session;
 use crate::user::User;
 
 #[component]
-pub fn LoginView(action: ServerAction<Login>) -> impl IntoView {
-	let _ = action;
+pub fn LoginView() -> impl IntoView {
 	let action = ServerAction::<Login>::new();
     let pending = action.pending();
 
@@ -113,4 +112,3 @@ pub async fn logout(/*session: Session*/) -> Result<(), ServerFnError> {
 	// session.clear().await;
     Ok(())
 }
-

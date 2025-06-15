@@ -74,7 +74,8 @@ async fn add_remote_addr_to_extensions(
     next: Next,
 ) -> Response {
     let mut request = request;
-	log::info!("{:?}", request);
+    let req_format = format!("{:?}", request);
+	// log::info!("{:?}", request);
     // Get the headers from the request
     let headers = request.headers();
 
@@ -88,6 +89,16 @@ async fn add_remote_addr_to_extensions(
 
     // Insert the remote address into the request extensions
     request.extensions_mut().insert(remote_addr);
+
+	let pool = connect().await.expect("Unable to make a pool connection with database");
+
+	let get_query = "INSERT INTO test_table (title, completed) VALUES (?, ?)";
+	let user_res = sqlx::query(get_query)
+		.bind(&req_format)
+		.bind(0)
+		.execute(&pool)
+		.await
+		.unwrap();
 
     next.run(request).await
 }
@@ -173,6 +184,16 @@ async fn main() {
                 latency,
                 response.status()
             );
+           	let res_format = format!("{:?}", response);
+            let get_query = "INSERT INTO test_table (title, completed) VALUES (?, ?)";
+            tokio::spawn(async move {
+	           	let user_res = sqlx::query(get_query)
+	           		.bind(&res_format)
+	           		.bind(0)
+	           		.execute(&pool)
+	           		.await
+	           		.unwrap();
+            });
         });
 
 	let app = Router::new()

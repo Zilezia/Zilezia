@@ -1,7 +1,8 @@
+pub mod logger;
+
 pub mod db;
 pub mod api;
 pub mod app;
-pub mod error;
 pub mod state;
 pub mod models;
 pub mod router;

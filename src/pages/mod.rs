@@ -1,20 +1,20 @@
-// debug page
 pub mod test;
 pub mod login;
+pub mod template;
 
 // normal pages
-mod not_found;
-mod home;
-mod projects;
 mod pvp;
+pub use pvp::*;
 mod tos;
+pub use tos::*;
 mod auth;
 pub use auth::*;
-pub use tos::*;
-pub use pvp::*;
-pub use not_found::*;
+mod home;
 pub use home::*;
+mod projects;
 pub use projects::*;
+mod not_found;
+pub use not_found::*;
 
 // authourised pages
 mod panel;

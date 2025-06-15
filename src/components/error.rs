@@ -66,8 +66,8 @@ pub fn ErrorTemplate(
     }
 
     view! {
-    	<TitleAndDescription title=format!("{} ", errors[0].status_code()) desc=""/>
     	<BotAuth/>
+    	<TitleAndDescription title=format!("{} ", errors[0].status_code()) desc=""/>
         <h1>{if errors.len() > 1 { "Errors" } else { "Error" }}</h1>
         <For
             each=move || { errors.clone().into_iter().enumerate() }

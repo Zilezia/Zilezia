@@ -60,14 +60,14 @@ pub fn View(project: ProjectSignal) -> impl IntoView {
 					</div>
 					<div class="bottom_info">
 						<Show when=move || project.with(|x| x.repo.clone()).is_some()>
-							<a class="" href=prepo.clone().unwrap_or_default()>
+							<a class="git_icon" href=prepo.clone().unwrap_or_default()>
 								<Octo/>
 							</a>
 						</Show>
 					</div>
 				</div>
 				// this is for me owly grrr
-				<Auth set_user>
+				<Auth>
 		       		<div class="edit_strip">
 		       			<Edit project/>
 		       			<Trash project/>
@@ -86,6 +86,7 @@ pub fn AddCard() -> impl IntoView {
 		// <div class="dummy_card_class"> //fr
 		<div>
 			<h2>"Add project"</h2>
+			
 	    	<ActionForm action=action attr:class="login_form">
 
 	    		<label class="type_input_label">
@@ -151,9 +152,7 @@ pub fn AddCard() -> impl IntoView {
 					"Submit"
 				</button>
 			</ActionForm>
-		  	// <Show when=move || is_err.get()>
-	             // <p>{err_string}</p>
-	        // </Show>
+			
 		</div>
 	}
 }

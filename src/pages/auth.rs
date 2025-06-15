@@ -3,8 +3,50 @@ use leptos::task::spawn_local;
 use leptos_meta::Title;
 use leptos_router::hooks::use_location;
 
+use crate::user::*;
 use crate::api::auth::*;
-use crate::components::{ icon::*, * };
+use crate::components::{
+	*,
+	icon::*,
+	error::*,
+};
+
+#[component]
+pub fn AuthPage(children: ChildrenFn) -> impl IntoView {	
+    let user = expect_context::<ReadUser>();
+    let set_user = expect_context::<WriteUser>();
+    let resource_user = Resource::new(|| (), |_| async { get_user().await });
+
+    let is_authed = Signal::derive(move || match resource_user.get() {
+		Some(res) => match res {
+            Ok(user) => {
+                set_user.set(Some(user));
+                true
+            }
+            _ => {
+                set_user.set(None);
+                false
+            }
+        },
+        _ => false
+    });
+
+    view! {
+        <Suspense fallback=Loading>
+            <Show
+                when=move || { is_authed.get() }
+                fallback=|| {
+           			let mut outside_errors = Errors::default();
+               		outside_errors.insert_with_default_key(
+                   		AppError::Unauthorized("Invalid Session ID".into())
+               		);
+               		view! { <ErrorTemplate outside_errors/>}
+               	}
+            >{children()}</Show>
+        </Suspense>
+    }
+}
+
 
 #[component]
 pub fn PageAuth() -> impl IntoView {

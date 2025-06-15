@@ -2,7 +2,7 @@ cfg_if::cfg_if! {
 	if #[cfg(feature = "ssr")] {
 		use crate::app::shell;
 		use crate::state::AppState;
-		use crate::error::AppError;
+		use crate::components::error::AppError;
 
 		use axum::{
 			body::Body,
@@ -72,10 +72,7 @@ cfg_if::cfg_if! {
 			state: State<AppState>,
 			session: Session,
 			request: Request<Body>,
-			// remote_addr: Option<std::net::SocketAddr>,
 		) -> AxumResponse {
-			// let use.nfo!("Received request {}, User-Agent: {}", addr, user_agent);
-		    
 			let handler = {
 				let State(app_state) = state.clone();
 				let app_state = app_state.clone();

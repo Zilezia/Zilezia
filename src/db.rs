@@ -2,7 +2,7 @@ cfg_if::cfg_if! {
 	if #[cfg(feature = "ssr")] {
 		use std::env::var;
 		use sqlx::MySqlPool;
-		use crate::error::AppError;
+		use crate::components::error::AppError;
 
 		pub async fn connect() -> Result<MySqlPool, AppError> {
 			// really don't need these variables like that I wanted these for a moment for debugging

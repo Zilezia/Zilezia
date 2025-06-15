@@ -8,10 +8,7 @@ use crate::components::auth::Auth;
 use crate::components::icon::Smull;
 
 #[component]
-pub fn Header(
-	logout: ServerAction<Logout>,
-	set_user: WriteUser,
-) -> impl IntoView {
+pub fn Header() -> impl IntoView {
     view! {
 		<header id="main_header">
 			// make this maybe show on some routes it might be annoying in hindsight (correct word?)
@@ -29,9 +26,11 @@ pub fn Header(
 				// </div>
 			// </div>
 			
-			<Auth set_user>
+			<Auth>
 	        	<A href="/panel" attr:class="total_last_link">"Panel"</A>
 			</Auth>
 		</header>
     }
 }
+
+

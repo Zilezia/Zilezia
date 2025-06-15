@@ -1,6 +1,4 @@
-// hydration doesn't work for some reason // kinda does now, but all hydrated components are viewed for me (good)
-
-// I kinda want this to be like a hub for my live? things, showing the versions status etc
+// I kinda want this to be like a hub for my live? things, showing the versions status etc // what am  i doing with myself
     	
 use std::sync::{ Arc, Mutex };
 use std::collections::{ HashMap, HashSet };
@@ -10,31 +8,32 @@ use leptos_meta::Title;
 
 use reactive_stores::Store;
 
+use crate::models::*;
 use crate::api::projects::*;
 use crate::user::{ WriteUser, ReadUser, get_user };
 use crate::components::{
 	Loading,
+	TitleAndDescription,
+	toggle::*,
 	auth::Auth,
 	accordion::*,
-	TitleAndDescription,
 	projects::card::*,
-	toggle::*,
 };
-use crate::models::*;
 
 
 // for checking if page loaded is an iframe
 // const inIframe = window.self !== window.top;
 
 #[component]
-pub fn Projects(set_user: WriteUser) -> impl IntoView {
-	let projects = Resource::new( // this creats
+pub fn Projects() -> impl IntoView {
+	let projects = Resource::new(
 		|| (),
 		|_| async move {
 			get_projects().await
 		}
 	);
 
+	// TODO: rewrite both these views
 	let nav_view = move || {
 		projects.with(move |x| {
 	        x.clone().map(move |res| {
@@ -109,14 +108,17 @@ pub fn Projects(set_user: WriteUser) -> impl IntoView {
 	};
 	
 	view! {
-    	<Title text="Projects "/>
+    	<TitleAndDescription
+    		title="Projects "
+    		desc="Majority of my projects that I find interesting to display on here at least."
+    	/>
     	<h1>"Projects"</h1>
     	<Suspense fallback=Loading>
     		{nav_view}
    		</Suspense>
 
    		// this is stupid /gen
-    	<Auth set_user>
+    	<Auth>
        		<ToggleProvider>
        			<Toggle text="+".into() attr:class="btn"/>
        			<ToggleShow is=true>
